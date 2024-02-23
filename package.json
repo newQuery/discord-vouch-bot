@@ -1,0 +1,17 @@
+{
+  "scripts": {
+    "start": "ts-node src/Bot.ts"
+  },
+  "dependencies": {
+    "axios": "^1.6.7",
+    "discord.js": "^14.14.1",
+    "dotenv": "^16.4.4"
+  },
+  "devDependencies": {
+    "@types/axios": "^0.14.0",
+    "@types/node": "^20.11.18",
+    "ts-node": "^10.9.2",
+    "typescript": "^5.3.3"
+  },
+  "type": "commonjs"
+}
