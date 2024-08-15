@@ -6,6 +6,7 @@ import {
   TextChannel,
 } from 'discord.js';
 import { Command } from '../Command';
+import addVouch from '../database/addVouch';
 
 export const Vouch: Command = {
   name: 'vouch',
@@ -61,5 +62,8 @@ export const Vouch: Command = {
       .setFooter({ text: '🚀 Only use if you have purchased.' });
 
     interaction.followUp({ embeds: [embed] });
+
+    // Save into database 
+    addVouch(interaction.user.id, message ?? 'No message left', rating ?? 0)
   },
 };
