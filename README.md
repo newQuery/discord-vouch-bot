@@ -1,5 +1,9 @@
 # Vouch discord bot
 
+## Updates
+
+- Added a `/restore`
+
 ## Description
 
 Add the `/vouch [message] [rating (1-5)]` to your discord server
