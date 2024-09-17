@@ -29,15 +29,6 @@ export const Restore: Command = {
       return;
     }
 
-    // Delete old vouches
-    const fetchedMessages = await interaction.channel.messages.fetch({ limit: 100 }); // Fetch recent 100 messages
-    for (const [, message] of fetchedMessages) {
-      if (message.embeds?.length > 0 && message.embeds[0]?.fields[0]?.name === 'Vouch Submitted!') {
-        await message.delete(); 
-        console.log(`Deleted vouch message: ${message.id}`);
-      }
-    }
-
     const vouches = getVouches(); 
 
     if (!vouches || vouches.length === 0) {

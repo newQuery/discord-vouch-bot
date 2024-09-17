@@ -6,14 +6,7 @@ import {
     TextBasedChannel,
   } from 'discord.js';
   import { Command } from '../Command';
-
-  const wipe = async (channel: TextBasedChannel, nbr: number)  => {
-    const fetchedMessages = await channel.messages.fetch({ limit: nbr });
-    for (const [, message] of fetchedMessages) {
-        await message.delete();
-    }
-    console.log(`Wipe finish. Deleted ${nbr} messages`)
-}
+import wipe from 'src/functions/wipe';
 
 export const Wipe: Command = {
     name: 'wipe',
@@ -38,6 +31,8 @@ export const Wipe: Command = {
             let removed = 0;
             for (let index = 1; index < nbr / 100; index++) {
                 const awaiting = nbr - removed;
+
+                if(awaiting <= 0) break;
 
                 await wipe(interaction.channel, awaiting > 100 ? 100 : awaiting)
                 removed += awaiting > 100 ? 100 : awaiting
