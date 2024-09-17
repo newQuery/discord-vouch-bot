@@ -6,7 +6,7 @@ import {
     TextBasedChannel,
   } from 'discord.js';
   import { Command } from '../Command';
-import wipe from 'src/functions/wipe';
+import wipe from '../functions/wipe';
 
 export const Wipe: Command = {
     name: 'wipe',
