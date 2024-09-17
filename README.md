@@ -36,6 +36,10 @@ yarn start
 
 /vouch [message] [rating (1-5)]
 
+Invite the bot with the following permissions :
+
+![Image](image/image.png)
+
 ## Common issues
 
 ### Unknown Integration
