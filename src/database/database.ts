@@ -1,6 +1,17 @@
+import fs from 'fs';
+import path from 'path';
 import Database from 'better-sqlite3';
 
-const db = new Database('database.db');
+// Define the database file path
+const dbFilePath = path.resolve('database.db');
+
+// Check if the database file exists, if not create it
+if (!fs.existsSync(dbFilePath)) {
+  console.log('Database not found, creating new database...');
+}
+
+// Initialize the SQLite database
+const db = new Database(dbFilePath);
 
 // Create tables if they don't exist
 db.exec(`

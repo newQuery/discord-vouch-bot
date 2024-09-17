@@ -12,7 +12,7 @@ export const Restore: Command = {
   description: 'Restore previous vouches',
   run: async (client: Client, interaction: CommandInteraction) => {
     if (!interaction.isChatInputCommand() || !(interaction.channel instanceof TextChannel)) return;
-
+    
     if (interaction.user.id !== interaction.guild?.ownerId) {
       await interaction.followUp({
         ephemeral: true,
@@ -29,10 +29,16 @@ export const Restore: Command = {
       return;
     }
 
-    const message = interaction.options.getString('message');
-    const rating = interaction.options.getNumber('rating');
+    // Delete old vouches
+    const fetchedMessages = await interaction.channel.messages.fetch({ limit: 100 }); // Fetch recent 100 messages
+    for (const [, message] of fetchedMessages) {
+      if (message.embeds?.length > 0 && message.embeds[0]?.fields[0]?.name === 'Vouch Submitted!') {
+        await message.delete(); 
+        console.log(`Deleted vouch message: ${message.id}`);
+      }
+    }
 
-    const vouches = await getVouches(); 
+    const vouches = getVouches(); 
 
     if (!vouches || vouches.length === 0) {
       await interaction.followUp({ content: 'No vouches found.', ephemeral: true });
@@ -70,7 +76,5 @@ export const Restore: Command = {
 
       await interaction.channel.send({ embeds: [embed] });
     }
-
-    await interaction.followUp({ content: `Restored ${vouches.length} vouches.`, ephemeral: true });
   },
 };

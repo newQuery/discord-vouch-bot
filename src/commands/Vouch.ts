@@ -32,11 +32,10 @@ export const Vouch: Command = {
     if (!interaction.isChatInputCommand() || !(interaction.channel instanceof TextChannel)) return;
 
     if (interaction.channel.name !== process.env?.VOUCH_CHANNEL_NAME ?? 'vouches') {
-      // uncomment if you want to let the user know why the command failed
-      // await interaction.followUp({
-      //   ephemeral: true,
-      //   content: 'You can only use this command in #vouches channel',
-      // });
+      await interaction.followUp({
+        ephemeral: true,
+        content: 'You can only use this command in #vouches channel',
+      });
       return;
     }
 
